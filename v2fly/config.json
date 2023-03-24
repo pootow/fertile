@@ -1,0 +1,39 @@
+{
+    "inbounds": [
+        {
+            "port": 8880,
+            "protocol": "VLESS",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "uuid",
+                        "level": 0
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "ws",
+                "wsSettings": {
+                    "path": "/",
+                    "headers": {}
+                },
+                "security": "tls",
+                "tlsSettings": {
+                    "certificates": [
+                        {
+                            "certificateFile": "/cert/fullchain.cer",
+                            "keyFile": "/cert/prn.zyqq.us.key"
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "freedom",
+            "settings": {}
+        }
+    ]
+}
