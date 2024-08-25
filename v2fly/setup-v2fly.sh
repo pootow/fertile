@@ -17,22 +17,21 @@ docker run -tid --name=acme.sh \
 docker exec acme.sh --register-account -m admin@${domain_name}
 docker exec acme.sh --issue -d ${domain_name} --standalone
 
+
+# run v2fly container
+
 # copy config file
 mkdir -p ~/config
 cp config.json ~/config/config.json.template
 
-
-# run v2fly container
-
 # get real path for ~/config
 config_path=$(realpath ~/config)
 
-# replace domain name in config file with envsubst
-envsubst '$uuid $domain_name' < ${config_path}/config.json.template > ${config_path}/config.json
-
 # TODO replace uuid in config file
 uuid=$(docker run --rm v2fly/v2fly-core uuid)
-sed -i "s/uuid/${uuid}/g" ${config_path}/config.json
+
+# replace domain name and uuid in config file with envsubst
+envsubst '$uuid $domain_name' < ${config_path}/config.json.template > ${config_path}/config.json
 
 docker run -tid --name v2fly \
   --restart=always \
