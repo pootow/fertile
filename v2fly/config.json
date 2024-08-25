@@ -6,7 +6,7 @@
             "settings": {
                 "clients": [
                     {
-                        "id": "uuid",
+                        "id": "${uuid}",
                         "level": 0
                     }
                 ],
@@ -23,7 +23,7 @@
                     "certificates": [
                         {
                             "certificateFile": "/cert/fullchain.cer",
-                            "keyFile": "/cert/prn.zyqq.us.key"
+                            "keyFile": "/cert/${domain_name}.key"
                         }
                     ]
                 }

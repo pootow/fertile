@@ -27,8 +27,8 @@ cp config.json ~/config/config.json
 # get real path for ~/config
 config_path=$(realpath ~/config)
 
-# replace domain name in config file
-sed -i "s/prn.zyqq.us/${domain_name}/g" ${config_path}/config.json
+# replace domain name in config file with envsubst
+envsubst '$uuid $domain_name' < ${config_path}/config.json > ${config_path}/config.json
 
 # TODO replace uuid in config file
 uuid=$(docker run --rm v2fly/v2fly-core uuid)
