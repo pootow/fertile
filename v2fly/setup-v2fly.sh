@@ -31,7 +31,11 @@ config_path=$(realpath ~/config)
 uuid=$(docker run --rm v2fly/v2fly-core uuid)
 
 # replace domain name and uuid in config file with envsubst
-envsubst '$uuid $domain_name' < ${config_path}/config.json.template > ${config_path}/config.json
+(
+  export uuid
+  export domain_name
+  envsubst '$uuid $domain_name' < ${config_path}/config.json.template > ${config_path}/config.json
+)
 
 docker run -tid --name v2fly \
   --restart=always \
