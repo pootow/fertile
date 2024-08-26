@@ -42,7 +42,7 @@ fi
 # if there is no cert, then get a new cert using `--issue -d ${domain_name} --standalone`
 if docker exec acme.sh --list | grep -q ${domain_name}; then
   # if the cert is expired, then renew it
-  if docker exec acme.sh --list | grep -q ${domain_name} | awk '{print $6}' | date -d -30days; then
+  if [[ $(docker exec acme.sh --list | grep -q ${domain_name} | awk '{print $6}' | date -d -30days +%s) -lt $(date +%s) ]]; then
     docker exec acme.sh --renew
   fi
 else
@@ -62,7 +62,7 @@ config_path=$(realpath ~/config)
 # check current config file for uuid using regex matching hex uuid and extract using regex, example line of config file:
 # "id": "ffffffff-ffff-ffff-ffff-ffffffffffff",
 # if uuid is not set, then generate a new uuid using `docker run --rm v2fly/v2fly-core uuid`
-uuid=$(grep -oE '"id": "[0-9a-fA-F-]+"' ${config_path}/config.json | grep -oE '[0-9a-fA-F-]+')
+uuid=$(sed -n 's/.*"id": "\(.*\)".*/\1/p' ${config_path}/config.json)
 if [ -z "$uuid" ]; then
   uuid=$(docker run --rm v2fly/v2fly-core uuid)
 
