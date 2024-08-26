@@ -15,9 +15,7 @@ done
 
 # setup for non-root user
 sh ./create-user.sh pootow
-cp ./ssh-init.sh /home/pootow/ssh-init.sh
-chown pootow:pootow /home/pootow/ssh-init.sh
-su pootow -c "cd ~ && sh ./ssh-init.sh"
+su pootow -c "sh ./ssh-init.sh"
 
 # sh ./setup-os-opt.sh
 # mordern linux kernel has already enabled bbr congestion control algorithm
