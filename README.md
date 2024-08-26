@@ -39,10 +39,10 @@ this project will start as a one off script, and will evolve to a more reusable 
       * [x] change kernel parameters
         * [x] change tcp to use more modern congestion control algorithm(like bbr)
   * [x] apt update and upgrade
-  * [ ] setup docker
+  * [x] setup docker
 * [ ] setup v2ray server on a vps
-  * [ ] setup v2ray server
-  * [ ] setup acme.sh
+  * [x] setup v2ray server
+  * [x] setup acme.sh
   * optional
     * [ ] setup nginx
     * [ ] setup a website for service obfuscation
