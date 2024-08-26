@@ -42,7 +42,7 @@ fi
 # if there is no cert, then get a new cert using `--issue -d ${domain_name} --standalone`
 if docker exec acme.sh --list | grep -q ${domain_name}; then
   # if the cert is expired, then renew it
-  if [[ $(docker exec acme.sh --list | grep -q ${domain_name} | awk '{print $6}' | date -d -30days +%s) -lt $(date +%s) ]]; then
+  if [ $(docker exec acme.sh --list | grep -q ${domain_name} | awk '{print $6}' | date -d -30days +%s) -lt $(date +%s) ]; then
     docker exec acme.sh --renew
   fi
 else
