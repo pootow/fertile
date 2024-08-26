@@ -29,7 +29,7 @@ this project will start as a one off script, and will evolve to a more reusable 
   * [ ] secure the server
     * [ ] setup normal user and disable root login
       * [x] setup user
-      * [x] remove user password
+      * [x] remove user password and disable console login
       * [x] setup sudo
       * [x] setup ssh key login
       * [x] remove ssh password login

@@ -10,8 +10,11 @@ fi
 # Create a user
 useradd -m -s /bin/bash "$username"
 
-# Add user to sudo group
-usermod -aG sudo "$username"
+# Add user to sudo group without password
+echo "$username ALL=(ALL) NOPASSWD:ALL" > "/etc/sudoers.d/$username"
 
 # Set password for user without password
 passwd -d "$username"
+
+# disable console login but keep ssh login
+passwd -l "$username"

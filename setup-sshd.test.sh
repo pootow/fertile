@@ -112,7 +112,7 @@ KbdInteractiveAuthentication no
 #       AllowTcpForwarding no
 #       PermitTTY no
 #       ForceCommand cvs server
-PasswordAuthentication no
+#       PasswordAuthentication no
 
 UseDNS no
 PermitRootLogin no
