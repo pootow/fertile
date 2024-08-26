@@ -14,7 +14,7 @@ select yn in "Yes" "No"; do
 done
 
 # setup for non-root user
-sh ./create-user.sh
+sh ./create-user.sh pootow
 cp ./ssh-init.sh /home/pootow/ssh-init.sh
 chown pootow:pootow /home/pootow/ssh-init.sh
 su pootow -c "cd ~ && sh ./ssh-init.sh"
@@ -27,5 +27,23 @@ sh ./setup-sshd.sh
 sh ./setup-docker.sh
 
 # run v2fly setup script as pootow
+
 cd v2fly
-su pootow -c "sh ./setup-v2fly.sh"
+
+# ask user to input domain name
+echo "
+Please input your domain name:"
+read domain_name
+
+su pootow -c "sh ./setup-v2fly.sh" $domain_name
+
+# ask user to reboot
+echo "
+Do you want to reboot now?"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) reboot; break;;
+        No ) exit;;
+        * ) exit;;
+    esac
+done

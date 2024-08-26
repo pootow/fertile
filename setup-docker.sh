@@ -1,7 +1,9 @@
+# Check if Docker is already installed
+if ! command -v docker &> /dev/null; then
+    # Install Docker via apt
+    apt-get update
+    apt-get install -y docker.io
+fi
 
-# install docker via apt
-apt-get update
-apt-get install -y docker.io
-
-# add user `pootow` to docker group
+# Add user `pootow` to the docker group
 usermod -aG docker pootow

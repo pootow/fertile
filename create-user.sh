@@ -1,10 +1,17 @@
-# create a sudo user pootow without password
+# Set default username
+username=${1:-pootow}
 
-# create a user
-useradd -m -s /bin/bash pootow
+# Check if user already exists
+if id "$username" >/dev/null 2>&1; then
+    echo "User $username already exists."
+    exit 0
+fi
 
-# add user to sudo group
-usermod -aG sudo pootow
+# Create a user
+useradd -m -s /bin/bash "$username"
 
-# set password for user without password
-passwd -d pootow
+# Add user to sudo group
+usermod -aG sudo "$username"
+
+# Set password for user without password
+passwd -d "$username"
